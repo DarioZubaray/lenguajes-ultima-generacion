@@ -2,7 +2,7 @@
 
 - [1er TP](/LUG-TP1)
 
-- [1er Parcial](/Primer Parcial)
+- [1er Parcial](/Primer%20Parcial)
 
 - 2do TP
 
