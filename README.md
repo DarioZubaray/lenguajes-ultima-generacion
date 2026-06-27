@@ -4,6 +4,6 @@
 
 - [1er Parcial](/Primer%20Parcial)
 
-- 2do TP
+- [2do TP](/LUG-TP2/)
 
 - 2do Parcial
