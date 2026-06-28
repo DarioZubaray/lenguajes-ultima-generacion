@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 using Abstraccion;
 using AccesoDatos;
@@ -10,113 +11,149 @@ namespace Mapeador
 {
     public class MapeadorAlumnos : IGestor<AlumnoBE>
     {
-        AccesoDAL acceso;
+        #region Atributos
+        private AccesoSP acceso;
+        #endregion
 
+        #region Constructor
         public MapeadorAlumnos()
         {
-            this.acceso = new AccesoDAL();
+            this.acceso = new AccesoSP();
         }
+        #endregion
 
-        public bool Baja(AlumnoBE objeto)
+        #region Metodos privados
+        private AlumnoBE MapearFila(DataRow fila)
         {
-            string consulta = string.Format(@"UPDATE Alumno SET activo = 0 WHERE legajo = {0}", objeto.Codigo);
-            return this.acceso.Guardar(consulta);
+            AlumnoBE alumno = new AlumnoBE();
+            alumno.Codigo = Convert.ToInt32(fila["legajo"]);
+            alumno.NombreApellido = fila["nombre_apellido"].ToString();
+            alumno.Documento = Convert.ToInt32(fila["documento"]);
+            alumno.Nacimiento = Convert.ToDateTime(fila["fecha_nacimiento"]);
+
+            DireccionBE direccion = new DireccionBE();
+            direccion.CalleNumero = fila["calle_numero"] != DBNull.Value ? fila["calle_numero"].ToString() : string.Empty;
+            direccion.Ciudad = fila["ciudad"] != DBNull.Value ? fila["ciudad"].ToString() : string.Empty;
+
+            alumno.Direccion = direccion;
+            return alumno;
         }
+        #endregion
 
-        public bool Guardar(AlumnoBE objeto)
+        #region IGestor
+
+        public List<AlumnoBE> ListarTodo()
         {
-            if (objeto.Codigo == 0)
+            List<AlumnoBE> lista = new List<AlumnoBE>();
+
+            try
             {
-                string consultaAlumno = string.Format(@"INSERT INTO Alumno(nombre_apellido, documento, fecha_nacimiento, activo) 
-                                                VALUES('{0}',{1},'{2}',1);
-                                                SELECT SCOPE_IDENTITY();",
-                                                objeto.NombreApellido, objeto.Documento, objeto.Nacimiento.ToString("yyyyMMdd"));
+                DataTable tabla = this.acceso.Leer("sp_AlumnoObtenerTodos");
 
-                var nuevoId = this.acceso.LeerScalar(consultaAlumno);
-
-                string consultaDireccion = string.Format(@"INSERT INTO Direccion (id_legajo, calle_numero, ciudad) 
-                                            VALUES ({0}, '{1}', '{2}')",
-                                                    nuevoId, objeto.Direccion.CalleNumero, objeto.Direccion.Ciudad);
-
-                return this.acceso.Guardar(consultaDireccion);
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    lista.Add(MapearFila(fila));
+                }
             }
-            else
+            catch
             {
-                string consultaAlumno = string.Format(@"UPDATE Alumno SET nombre_apellido='{0}', documento={1}, fecha_nacimiento='{2}' 
-                                                    WHERE legajo = {3}",
-                                                    objeto.NombreApellido, objeto.Documento, objeto.Nacimiento.ToString("yyyyMMdd"), objeto.Codigo);
-
-                this.acceso.Guardar(consultaAlumno);
-
-                string consultaDireccion = string.Format(@"UPDATE Direccion SET calle_numero='{0}', ciudad='{1}' 
-                                                        WHERE id_legajo = {2}",
-                                                        objeto.Direccion.CalleNumero, objeto.Direccion.Ciudad, objeto.Codigo);
-
-                return this.acceso.Guardar(consultaDireccion);
+                throw;
             }
+
+            return lista;
         }
 
         public AlumnoBE ListarObjeto(AlumnoBE objeto)
         {
-            string Consulta = string.Format(@"SELECT a.legajo, a.nombre_apellido, a.documento, a.fecha_nacimiento, 
-                                        d.calle_numero, d.ciudad 
-                                FROM Alumno a
-                                INNER JOIN Direccion d ON a.legajo = d.id_legajo
-                                WHERE a.activo = 1 and a.legajo = {0}", objeto.Codigo);
+            AlumnoBE alumno = new AlumnoBE();
 
-            DataTable Tabla = this.acceso.Leer(Consulta);
-
-            AlumnoBE alumnoBD = new AlumnoBE();
-            if (Tabla.Rows.Count > 0)
+            try
             {
-                foreach (DataRow fila in Tabla.Rows)
+                SqlParameter[] parametros = new SqlParameter[]
                 {
-                    alumnoBD.Codigo = Convert.ToInt32(fila[0]);
-                    alumnoBD.NombreApellido = fila[1].ToString();
-                    alumnoBD.Documento = Convert.ToInt32(fila[2]);
-                    alumnoBD.Nacimiento = (DateTime)fila[3];
+                    new SqlParameter("@legajo", SqlDbType.Int) { Value = objeto.Codigo }
+                };
 
-                    DireccionBE direccion = new DireccionBE();
-                    direccion.CalleNumero = fila["calle_numero"].ToString();
-                    direccion.Ciudad = fila["ciudad"].ToString();
+                DataTable tabla = this.acceso.Leer("sp_AlumnoObtenerPorLegajo", parametros);
 
-                    alumnoBD.Direccion = direccion;
+                if (tabla.Rows.Count > 0)
+                {
+                    alumno = MapearFila(tabla.Rows[0]);
                 }
             }
-            return alumnoBD;
+            catch
+            {
+                throw;
+            }
+
+            return alumno;
         }
 
-        public List<AlumnoBE> ListarTodo()
+        public bool Guardar(AlumnoBE objeto)
         {
-            List<AlumnoBE> listaAlumnos = new List<AlumnoBE>();
-
-            string Consulta = @"SELECT a.legajo, a.nombre_apellido, a.documento, a.fecha_nacimiento, 
-                                        d.calle_numero, d.ciudad 
-                                FROM Alumno a
-                                INNER JOIN Direccion d ON a.legajo = d.id_legajo
-                                WHERE a.activo = 1";
-
-            DataTable Tabla = this.acceso.Leer(Consulta);
-
-            if (Tabla.Rows.Count > 0)
+            try
             {
-                foreach (DataRow fila in Tabla.Rows)
+                if (objeto.Codigo == 0)
                 {
-                    AlumnoBE alumnoBD = new AlumnoBE();
-                    alumnoBD.Codigo = Convert.ToInt32(fila[0]);
-                    alumnoBD.NombreApellido = fila[1].ToString();
-                    alumnoBD.Documento = Convert.ToInt32(fila[2]);
-                    alumnoBD.Nacimiento = (DateTime)fila[3];
+                    // Alta: el SP devuelve el nuevo legajo via parametro OUTPUT
+                    SqlParameter paramOutput = new SqlParameter("@nuevo_legajo", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
 
-                    DireccionBE direccion = new DireccionBE();
-                    direccion.CalleNumero = fila["calle_numero"].ToString();
-                    direccion.Ciudad = fila["ciudad"].ToString();
+                    SqlParameter[] parametros = new SqlParameter[]
+                    {
+                        new SqlParameter("@nombre_apellido",  SqlDbType.VarChar, 200) { Value = objeto.NombreApellido },
+                        new SqlParameter("@documento",        SqlDbType.Int)          { Value = objeto.Documento },
+                        new SqlParameter("@fecha_nacimiento", SqlDbType.Date)         { Value = objeto.Nacimiento },
+                        new SqlParameter("@calle_numero",     SqlDbType.VarChar, 250) { Value = objeto.Direccion.CalleNumero },
+                        new SqlParameter("@ciudad",           SqlDbType.VarChar, 100) { Value = objeto.Direccion.Ciudad },
+                        paramOutput
+                    };
 
-                    alumnoBD.Direccion = direccion;
-                    listaAlumnos.Add(alumnoBD);
+                    int nuevoLegajo = this.acceso.EjecutarConOutput("sp_AlumnoInsertar", parametros, "@nuevo_legajo");
+                    objeto.Codigo = nuevoLegajo;
+                    return nuevoLegajo > 0;
+                }
+                else
+                {
+                    // Modificacion
+                    SqlParameter[] parametros = new SqlParameter[]
+                    {
+                        new SqlParameter("@legajo",           SqlDbType.Int)          { Value = objeto.Codigo },
+                        new SqlParameter("@nombre_apellido",  SqlDbType.VarChar, 200) { Value = objeto.NombreApellido },
+                        new SqlParameter("@documento",        SqlDbType.Int)          { Value = objeto.Documento },
+                        new SqlParameter("@fecha_nacimiento", SqlDbType.Date)         { Value = objeto.Nacimiento },
+                        new SqlParameter("@calle_numero",     SqlDbType.VarChar, 250) { Value = objeto.Direccion.CalleNumero },
+                        new SqlParameter("@ciudad",           SqlDbType.VarChar, 100) { Value = objeto.Direccion.Ciudad }
+                    };
+
+                    return this.acceso.Ejecutar("sp_AlumnoActualizar", parametros);
                 }
             }
-            return listaAlumnos;
+            catch
+            {
+                throw;
+            }
         }
+
+        public bool Baja(AlumnoBE objeto)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@legajo", SqlDbType.Int) { Value = objeto.Codigo }
+                };
+
+                return this.acceso.Ejecutar("sp_AlumnoBorrar", parametros);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #endregion
     }
 }
