@@ -84,6 +84,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCBuscador.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCBuscador.Designer.cs">
+      <DependentUpon>UCBuscador.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormAlumnos.resx">
       <DependentUpon>FormAlumnos.cs</DependentUpon>
     </EmbeddedResource>

@@ -33,6 +33,10 @@ namespace Presentacion
             this.txtNombreYApellido = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.txtLegajo = new System.Windows.Forms.TextBox();
+            this.lblLegajo = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCrear = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -44,10 +48,7 @@ namespace Presentacion
             this.lblCalleYNumero = new System.Windows.Forms.Label();
             this.txtDocumento = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtLegajo = new System.Windows.Forms.TextBox();
-            this.lblLegajo = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.ucBuscador = new Presentacion.UCBuscador();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -95,10 +96,50 @@ namespace Presentacion
             this.groupBox1.Controls.Add(this.lblDocumento);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 387);
+            this.groupBox1.Size = new System.Drawing.Size(342, 430);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ABM Alumno";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(211, 285);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(97, 23);
+            this.btnEliminar.TabIndex = 13;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Enabled = false;
+            this.btnModificar.Location = new System.Drawing.Point(109, 285);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(97, 23);
+            this.btnModificar.TabIndex = 12;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtLegajo
+            // 
+            this.txtLegajo.Enabled = false;
+            this.txtLegajo.Location = new System.Drawing.Point(109, 22);
+            this.txtLegajo.Name = "txtLegajo";
+            this.txtLegajo.ReadOnly = true;
+            this.txtLegajo.Size = new System.Drawing.Size(200, 20);
+            this.txtLegajo.TabIndex = 11;
+            // 
+            // lblLegajo
+            // 
+            this.lblLegajo.AutoSize = true;
+            this.lblLegajo.Location = new System.Drawing.Point(10, 25);
+            this.lblLegajo.Name = "lblLegajo";
+            this.lblLegajo.Size = new System.Drawing.Size(39, 13);
+            this.lblLegajo.TabIndex = 10;
+            this.lblLegajo.Text = "Legajo";
             // 
             // btnLimpiar
             // 
@@ -193,61 +234,30 @@ namespace Presentacion
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(361, 13);
+            this.dataGridView1.Location = new System.Drawing.Point(360, 56);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(611, 386);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // txtLegajo
+            // ucBuscador
             // 
-            this.txtLegajo.Enabled = false;
-            this.txtLegajo.Location = new System.Drawing.Point(109, 22);
-            this.txtLegajo.Name = "txtLegajo";
-            this.txtLegajo.ReadOnly = true;
-            this.txtLegajo.Size = new System.Drawing.Size(200, 20);
-            this.txtLegajo.TabIndex = 11;
+            this.ucBuscador.Location = new System.Drawing.Point(361, 26);
+            this.ucBuscador.Name = "ucBuscador";
+            this.ucBuscador.Placeholder = "Buscar...";
+            this.ucBuscador.Size = new System.Drawing.Size(280, 24);
+            this.ucBuscador.TabIndex = 5;
             // 
-            // lblLegajo
-            // 
-            this.lblLegajo.AutoSize = true;
-            this.lblLegajo.Location = new System.Drawing.Point(10, 25);
-            this.lblLegajo.Name = "lblLegajo";
-            this.lblLegajo.Size = new System.Drawing.Size(39, 13);
-            this.lblLegajo.TabIndex = 10;
-            this.lblLegajo.Text = "Legajo";
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(109, 285);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(97, 23);
-            this.btnModificar.TabIndex = 12;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(211, 285);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(97, 23);
-            this.btnEliminar.TabIndex = 13;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // Alumnos
+            // FormAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 411);
+            this.ClientSize = new System.Drawing.Size(984, 459);
+            this.Controls.Add(this.ucBuscador);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Alumnos";
+            this.Name = "FormAlumnos";
             this.Text = "Alumnos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -279,5 +289,6 @@ namespace Presentacion
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label lblLegajo;
+        private UCBuscador ucBuscador;
     }
 }

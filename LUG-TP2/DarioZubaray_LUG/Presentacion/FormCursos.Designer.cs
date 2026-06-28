@@ -45,6 +45,7 @@ namespace Presentacion
             this.lblInicio = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ucBuscador = new Presentacion.UCBuscador();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -94,7 +95,7 @@ namespace Presentacion
             this.groupBox1.Controls.Add(this.lblCodigo);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(305, 295);
+            this.groupBox1.Size = new System.Drawing.Size(305, 335);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cursos";
@@ -206,18 +207,27 @@ namespace Presentacion
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(324, 13);
+            this.dataGridView1.Location = new System.Drawing.Point(324, 53);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(464, 294);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
+            // ucBuscador
+            // 
+            this.ucBuscador.Location = new System.Drawing.Point(324, 22);
+            this.ucBuscador.Name = "ucBuscador";
+            this.ucBuscador.Placeholder = "Buscar...";
+            this.ucBuscador.Size = new System.Drawing.Size(280, 24);
+            this.ucBuscador.TabIndex = 5;
+            // 
             // FormCursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 319);
+            this.ClientSize = new System.Drawing.Size(800, 361);
+            this.Controls.Add(this.ucBuscador);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormCursos";
@@ -247,5 +257,6 @@ namespace Presentacion
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblPrecio;
+        private UCBuscador ucBuscador;
     }
 }
