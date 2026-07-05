@@ -29,6 +29,7 @@ namespace BLL
                 ContratacionView view = new ContratacionView();
 
                 var cliente = this._clienteMPP.ObtenerPorCodigo(contratacion.CodigoCliente);
+
                 view.cliente = cliente.ToString();
 
                 var dispositivo = this._dispositivoMPP.ObtenerPorCodigo(contratacion.CodigoDispositivo);

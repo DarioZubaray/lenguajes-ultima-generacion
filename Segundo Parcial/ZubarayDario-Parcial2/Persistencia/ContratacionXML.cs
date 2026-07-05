@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
@@ -30,7 +29,7 @@ namespace Persistencia
             XmlDocument doc = new XmlDocument();
             XmlElement raiz = doc.CreateElement("Contratacion");
             doc.AppendChild(raiz);
-
+            /*
             var ejemplos = new List<Contratacion>
             {
                 new Contratacion
@@ -42,7 +41,7 @@ namespace Persistencia
 
             foreach (var contratacion in ejemplos)
                 raiz.AppendChild(CrearNodo(doc, contratacion));
-
+            */
             doc.Save(this.rutaArchivo);
         }
         #endregion

@@ -25,7 +25,7 @@ namespace UI
 
             this._listaContratacion = new List<ContratacionView>();
 
-            cbClientes.DataSource = _clienteBLL.ListarTodo();
+            cbClientes.DataSource = _clienteBLL.ListarSinContrataciones();
             cbDispositivo.DataSource = _dispositivoBLL.ListarTodo();
             InicializarGrilla();
             CargarGrilla();

@@ -158,6 +158,16 @@ namespace Persistencia
                     ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Precio", dispositivo.Precio.ToString());
                     ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Cantidad", dispositivo.Cantidad.ToString());
                     ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Estado", EstadoDispositivo.Adquirido.ToString());
+                    ActualizarOCrearProcesador(doc, LennodoDispositivo, dispositivo.Procesador);
+
+                    if (dispositivo is Notebook notebook)
+                    {
+                        ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Proposito", notebook.Proposito);
+                    }
+                    else if (dispositivo is TelefonoMovil telefono)
+                    {
+                        ActualizarOCrearSubNodo(doc, LennodoDispositivo, "ResistenteAgua", telefono.ResistenteAgua.ToString());
+                    }
                 }
 
                 doc.Save(this.rutaArchivo);
@@ -177,6 +187,20 @@ namespace Persistencia
                 nodoPadre.AppendChild(subNodo);
             }
             subNodo.InnerText = valor;
+        }
+
+        private void ActualizarOCrearProcesador(XmlDocument doc, XmlNode nodoPadre, Procesador procesador)
+        {
+            XmlElement nodoProcesador = nodoPadre["Procesador"];
+            if (nodoProcesador == null)
+            {
+                nodoProcesador = doc.CreateElement("Procesador");
+                nodoPadre.AppendChild(nodoProcesador);
+            }
+
+            ActualizarOCrearSubNodo(doc, nodoProcesador, "Codigo", procesador.Codigo.ToString());
+            ActualizarOCrearSubNodo(doc, nodoProcesador, "Marca", procesador.Marca);
+            ActualizarOCrearSubNodo(doc, nodoProcesador, "Frecuencia", procesador.Frecuencia.ToString());
         }
 
         public void Eliminar(int codigo)

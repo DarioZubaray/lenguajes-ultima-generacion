@@ -33,7 +33,7 @@ namespace Persistencia
 
             var ejemplos = new List<Dispositivo>
             {
-                new Dispositivo
+                new Notebook
                 {
                     Codigo = 1,
                     Descripcion = "Notebook Lenovo ThinkPad E14",
@@ -43,11 +43,12 @@ namespace Persistencia
                     Procesador = new Procesador
                     {
                         Codigo = 1,
-                        Marca = "Intel Core i5-12400"
+                        Marca = "Intel Core i5-12400",
+                        Frecuencia = 1.5
                     }
                 },
 
-                new Dispositivo
+                new Notebook
                 {
                     Codigo = 2,
                     Descripcion = "PC Gamer Ryzen 7",
@@ -57,11 +58,12 @@ namespace Persistencia
                     Procesador = new Procesador
                     {
                         Codigo = 2,
-                        Marca = "AMD Ryzen 7 7700X"
+                        Marca = "AMD Ryzen 7 7700X",
+                        Frecuencia = 3.0
                     }
                 },
 
-                new Dispositivo
+                new Notebook
                 {
                     Codigo = 3,
                     Descripcion = "Servidor Dell PowerEdge",
@@ -71,7 +73,8 @@ namespace Persistencia
                     Procesador = new Procesador
                     {
                         Codigo = 3,
-                        Marca = "Intel Xeon Silver 4410Y"
+                        Marca = "Intel Xeon Silver 4410Y",
+                        Frecuencia = 2.5
                     }
                 }
             };
@@ -88,7 +91,6 @@ namespace Persistencia
         {
             XmlElement nodo = doc.CreateElement("Dispositivo");
 
-            // Atributo que identifica el tipo concreto (Notebook / TelefonoMovil)
             string tipo = dispositivo is Notebook ? "Notebook"
                         : dispositivo is TelefonoMovil ? "TelefonoMovil"
                         : "Generico";
@@ -101,7 +103,6 @@ namespace Persistencia
             AgregarElemento(doc, nodo, "Estado", dispositivo.Estado.ToString());
             nodo.AppendChild(CrearProcesador(doc, dispositivo.Procesador));
 
-            // Elementos especificos segun el tipo concreto
             if (dispositivo is Notebook notebook)
             {
                 AgregarElemento(doc, nodo, "Proposito", notebook.Proposito);

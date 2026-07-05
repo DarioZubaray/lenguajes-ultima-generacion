@@ -8,22 +8,26 @@ namespace MPP
 {
     public class ClientesMPP
     {
-        private ClientesXML ClienteXML;
+        private ClientesXML _clienteXML;
+        private DispositivosMPP _dispositivosMPP;
 
         public ClientesMPP()
         {
-            ClienteXML = new ClientesXML();
+            this._clienteXML = new ClientesXML();
+            this._dispositivosMPP = new DispositivosMPP();
         }
 
         #region Metodos privados
         private Cliente NodoACliente(XmlNode nodo)
         {
+            var dispositivo = _dispositivosMPP.NodoADispositivo(nodo);
             return new Cliente
             {
                 Codigo = int.Parse(nodo["Codigo"].InnerText),
                 Nombre = nodo["Nombre"].InnerText,
                 Apellido = nodo["Apellido"].InnerText,
-                DNI = int.Parse(nodo["DNI"].InnerText)
+                DNI = int.Parse(nodo["DNI"].InnerText),
+                Dispositivo = dispositivo
             };
         }
         #endregion
@@ -34,7 +38,7 @@ namespace MPP
             List<Cliente> lista = new List<Cliente>();
             try
             {
-                var xmlClientes = ClienteXML.ObtenerClientes();
+                var xmlClientes = _clienteXML.ObtenerClientes();
                 foreach (XmlNode clienteNodo in xmlClientes)
                 {
                     var cliente = NodoACliente(clienteNodo);
@@ -53,7 +57,7 @@ namespace MPP
         {
             try
             {
-                XmlDocument doc = ClienteXML.GetXmlDocument();
+                XmlDocument doc = _clienteXML.GetXmlDocument();
 
                 XmlNode nodo = doc.SelectSingleNode($"//Cliente[Codigo='{codigo}']");
                 return nodo != null ? NodoACliente(nodo) : null;
@@ -70,12 +74,12 @@ namespace MPP
             {
                 if (cliente.Codigo == 0)
                 {
-                    ClienteXML.Insertar(cliente);
+                    _clienteXML.Insertar(cliente);
                     return true;
                 }
                 else
                 {
-                    ClienteXML.Actualizar(cliente);
+                    _clienteXML.Actualizar(cliente);
                     return true;
                 }
             }
@@ -89,7 +93,7 @@ namespace MPP
         {
             try
             {
-                ClienteXML.Eliminar(cliente.Codigo);
+                _clienteXML.Eliminar(cliente.Codigo);
                 return true;
             }
             catch

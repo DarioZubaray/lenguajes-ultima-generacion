@@ -17,13 +17,27 @@ namespace MPP
         }
 
         #region Metodos privados
-        private Dispositivo NodoADispositivo(XmlNode nodo)
+        public Dispositivo NodoADispositivo(XmlNode nodo)
+        {
+            if (nodo == null) return null;
+
+            XmlNode nodoDispositivo = nodo.Name == "Dispositivo"
+                ? nodo
+                : nodo.SelectSingleNode(".//Dispositivo");
+
+            if (nodoDispositivo == null || nodoDispositivo["Estado"] == null)
+                return null;
+
+            return mapDispositivo(nodoDispositivo);
+        }
+
+        private Dispositivo mapDispositivo(XmlNode nodo)
         {
             string input = nodo["Estado"].InnerText;
             Enum.TryParse<EstadoDispositivo>(input, out EstadoDispositivo result);
 
-            string tipo = nodo.Attributes["tipo"]?.Value;
             Dispositivo dispositivo;
+            string tipo = nodo.Attributes["tipo"]?.Value;
 
             switch (tipo)
             {
@@ -35,6 +49,7 @@ namespace MPP
                     break;
 
                 case "TelefonoMovil":
+                case "Teléfono Movil":
                     dispositivo = new TelefonoMovil
                     {
                         ResistenteAgua = nodo["ResistenteAgua"] != null

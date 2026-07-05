@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using BE;
@@ -58,6 +59,20 @@ namespace BLL
         public List<Cliente> ListarTodo()
         {
             return mapeador.ListarTodo();
+        }
+
+        public List<Cliente> ListarSinContrataciones()
+        {
+            var clientes = mapeador.ListarTodo();
+            List<Cliente> clientesSinContratacion = new List<Cliente>();
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Dispositivo != null)
+                    continue;
+
+                clientesSinContratacion.Add(cliente);
+            }
+            return clientesSinContratacion;
         }
         #endregion
     }
