@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteXML.cs" />
+    <Compile Include="ClientesXML.cs" />
+    <Compile Include="DispositivosXML.cs" />
+    <Compile Include="ProcesadorXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

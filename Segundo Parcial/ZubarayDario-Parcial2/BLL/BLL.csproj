@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="ClienteException.cs" />
     <Compile Include="ClientesBLL.cs" />
+    <Compile Include="DispositivoException.cs" />
+    <Compile Include="DispositivosBLL.cs" />
+    <Compile Include="ProcesadorBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

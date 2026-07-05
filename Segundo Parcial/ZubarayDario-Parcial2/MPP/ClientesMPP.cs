@@ -6,13 +6,13 @@ using Persistencia;
 
 namespace MPP
 {
-    public class ClienteMPP
+    public class ClientesMPP
     {
-        private ClienteXML ClienteXML;
+        private ClientesXML ClienteXML;
 
-        public ClienteMPP()
+        public ClientesMPP()
         {
-            ClienteXML = new ClienteXML();
+            ClienteXML = new ClientesXML();
         }
 
         #region Metodos privados
@@ -29,7 +29,6 @@ namespace MPP
         #endregion
 
         #region CRUD
-
         public List<Cliente> ListarTodo()
         {
             List<Cliente> lista = new List<Cliente>();
@@ -83,7 +82,6 @@ namespace MPP
                 throw;
             }
         }
-
         #endregion
     }
 }

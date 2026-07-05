@@ -75,6 +75,9 @@
     <EmbeddedResource Include="ClientesForm.resx">
       <DependentUpon>ClientesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DispositivosForm.resx">
+      <DependentUpon>DispositivosForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

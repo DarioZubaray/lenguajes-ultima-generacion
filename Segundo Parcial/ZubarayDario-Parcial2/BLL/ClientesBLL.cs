@@ -11,11 +11,11 @@ namespace BLL
         private static readonly Regex _regexNombre = new Regex(@"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$");
         private static readonly Regex _regexApellido = new Regex(@"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$");
 
-        public ClienteMPP mapeador;
+        public ClientesMPP mapeador;
 
         public ClientesBLL()
         {
-            mapeador = new ClienteMPP();
+            mapeador = new ClientesMPP();
         }
 
         #region Metodos Logica Negocio

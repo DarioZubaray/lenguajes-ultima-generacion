@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteMPP.cs" />
+    <Compile Include="ClientesMPP.cs" />
+    <Compile Include="DispositivosMPP.cs" />
+    <Compile Include="ProcesadorMPP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

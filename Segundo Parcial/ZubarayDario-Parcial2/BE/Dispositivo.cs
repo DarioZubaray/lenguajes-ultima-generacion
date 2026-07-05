@@ -6,7 +6,7 @@
         public string Descripcion { get; set; }
         public double Precio { get; set; }
         public int Cantidad { get; set; }
-        private EstadoDispositivo Estado { get; set; }
+        public EstadoDispositivo Estado { get; set; }
         public Procesador Procesador { get; set; }
 
         public virtual double DescuentoCalculado()
@@ -17,6 +17,11 @@
         public EstadoDispositivo DevolverEstado()
         {
             return Estado;
+        }
+
+        public override string ToString()
+        {
+            return $"{Descripcion}";
         }
     }
 }

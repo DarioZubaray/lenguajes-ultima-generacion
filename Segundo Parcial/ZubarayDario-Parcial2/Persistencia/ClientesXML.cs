@@ -7,14 +7,14 @@ using BE;
 
 namespace Persistencia
 {
-    public class ClienteXML
+    public class ClientesXML
     {
         #region Atributos
         private readonly string rutaArchivo;
         #endregion
 
         #region Constructor
-        public ClienteXML()
+        public ClientesXML()
         {
             this.rutaArchivo = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory, "clientes.xml");
