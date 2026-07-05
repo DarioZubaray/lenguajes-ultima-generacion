@@ -10,18 +10,18 @@ namespace BLL
     {
         private ClientesMPP _clienteMPP;
         private DispositivosMPP _dispositivoMPP;
-        private ContratacionMPP _contratacioneMPP;
+        private ContratacionMPP _contratacionesMPP;
 
         public ContratacionBLL()
         {
             this._clienteMPP = new ClientesMPP();
             this._dispositivoMPP = new DispositivosMPP();
-            this._contratacioneMPP = new ContratacionMPP();
+            this._contratacionesMPP = new ContratacionMPP();
         }
 
         public List<ContratacionView> ListarTodo()
         {
-            var contrataciones = _contratacioneMPP.ListarTodo();
+            var contrataciones = _contratacionesMPP.ListarTodo();
 
             List<ContratacionView> listaView = new List<ContratacionView>();
             foreach(var contratacion in contrataciones)
@@ -42,7 +42,7 @@ namespace BLL
 
         public void Contratar(Cliente cliente, Dispositivo dispositivo)
         {
-            this._contratacioneMPP.Guardar(cliente, dispositivo);
+            this._contratacionesMPP.Guardar(cliente, dispositivo);
         }
     }
 }

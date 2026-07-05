@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using BE;
+﻿using BE;
 using MPP;
 
 namespace BLL
@@ -17,47 +13,35 @@ namespace BLL
             this._contratacionMPP = new ContratacionMPP();
             this._dispositivosMPP = new DispositivosMPP();
         }
-        public (string[] dispositivos, double[] montos) ObtenerMontosRecaudados()
+
+        public (string[] tipos, double[] montos) ObtenerMontosRecaudados()
         {
             var contrataciones = _contratacionMPP.ListarTodo();
 
-            var conteoDispositivos = AgruparYContarPorDispositivo(contrataciones);
+            double montoNotebook = 0;
+            double montoTelefonoMovil = 0;
 
-            var masVendidos = ObtenerTopDispositivos(conteoDispositivos, limite: 5);
-
-            return ConstruirEstructuraRetorno(masVendidos);
-        }
-
-        private Dictionary<int, int> AgruparYContarPorDispositivo(IEnumerable<Contratacion> contrataciones)
-        {
-            return contrataciones
-                .GroupBy(c => c.CodigoDispositivo)
-                .ToDictionary(grupo => grupo.Key, grupo => grupo.Count());
-        }
-
-        private List<KeyValuePair<int, int>> ObtenerTopDispositivos(Dictionary<int, int> conteo, int limite)
-        {
-            return conteo
-                .OrderByDescending(par => par.Value)
-                .Take(limite)
-                .ToList();
-        }
-
-        private (string[] dispositivos, double[] unidades) ConstruirEstructuraRetorno(List<KeyValuePair<int, int>> datos)
-        {
-            string[] dispositivos = new string[datos.Count];
-            double[] unidades = new double[datos.Count];
-
-            for (int i = 0; i < datos.Count; i++)
+            foreach (var contratacion in contrataciones)
             {
-                int codigo = datos[i].Key;
-                var dispositivo = _dispositivosMPP.ObtenerPorCodigo(codigo);
+                var dispositivo = _dispositivosMPP.ObtenerPorCodigo(contratacion.CodigoDispositivo);
 
-                dispositivos[i] = dispositivo != null ? dispositivo.Descripcion : $"Desconocido ({codigo})";
-                unidades[i] = datos[i].Value;
+                if (dispositivo == null)
+                    continue;
+
+                if (dispositivo is Notebook)
+                {
+                    montoNotebook += dispositivo.DescuentoCalculado();
+                }
+                else if (dispositivo is TelefonoMovil)
+                {
+                    montoTelefonoMovil += dispositivo.DescuentoCalculado();
+                }
             }
 
-            return (dispositivos, unidades);
+            string[] tipos = { "Notebook", "Telefono Movil" };
+            double[] montos = { montoNotebook, montoTelefonoMovil };
+
+            return (tipos, montos);
         }
     }
 }

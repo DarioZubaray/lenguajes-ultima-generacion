@@ -88,12 +88,28 @@ namespace Persistencia
         {
             XmlElement nodo = doc.CreateElement("Dispositivo");
 
+            // Atributo que identifica el tipo concreto (Notebook / TelefonoMovil)
+            string tipo = dispositivo is Notebook ? "Notebook"
+                        : dispositivo is TelefonoMovil ? "TelefonoMovil"
+                        : "Generico";
+            nodo.SetAttribute("tipo", tipo);
+
             AgregarElemento(doc, nodo, "Codigo", dispositivo.Codigo.ToString());
             AgregarElemento(doc, nodo, "Descripcion", dispositivo.Descripcion);
             AgregarElemento(doc, nodo, "Precio", dispositivo.Precio.ToString());
             AgregarElemento(doc, nodo, "Cantidad", dispositivo.Cantidad.ToString());
             AgregarElemento(doc, nodo, "Estado", dispositivo.Estado.ToString());
             nodo.AppendChild(CrearProcesador(doc, dispositivo.Procesador));
+
+            // Elementos especificos segun el tipo concreto
+            if (dispositivo is Notebook notebook)
+            {
+                AgregarElemento(doc, nodo, "Proposito", notebook.Proposito);
+            }
+            else if (dispositivo is TelefonoMovil telefono)
+            {
+                AgregarElemento(doc, nodo, "ResistenteAgua", telefono.ResistenteAgua.ToString());
+            }
 
             return nodo;
         }

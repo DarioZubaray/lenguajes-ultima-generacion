@@ -22,6 +22,8 @@ namespace UI
 
             cbEstado.DataSource = Enum.GetValues(typeof(EstadoDispositivo));
             cbProcesador.DataSource = this._procesadorBLL.ListarTodo();
+            cbTipo.SelectedIndex = 0;
+            cbProposito.SelectedIndex = 0;
 
             InicializarGrilla();
             CargarGrilla();
@@ -50,15 +52,31 @@ namespace UI
 
         private Dispositivo CargarDelFormulario()
         {
-            return new Dispositivo()
+            Dispositivo dispositivo;
+
+            if (cbTipo.SelectedItem?.ToString() == "Notebook")
             {
-                Codigo = 0,
-                Descripcion = txtDescripcion.Text.Trim(),
-                Precio = Convert.ToDouble(txtPrecio.Text.Trim()),
-                Cantidad = Convert.ToInt32(txtCantidad.Text.Trim()),
-                Estado = (EstadoDispositivo)cbEstado.SelectedItem,
-                Procesador = (Procesador)cbProcesador.SelectedItem
-            };
+                dispositivo = new Notebook
+                {
+                    Proposito = cbProposito.SelectedItem.ToString().Trim()
+                };
+            }
+            else
+            {
+                dispositivo = new TelefonoMovil
+                {
+                    ResistenteAgua = chkResistenteAgua.Checked
+                };
+            }
+
+            dispositivo.Codigo = 0;
+            dispositivo.Descripcion = txtDescripcion.Text.Trim();
+            dispositivo.Precio = Convert.ToDouble(txtPrecio.Text.Trim());
+            dispositivo.Cantidad = Convert.ToInt32(txtCantidad.Text.Trim());
+            dispositivo.Estado = (EstadoDispositivo)cbEstado.SelectedItem;
+            dispositivo.Procesador = (Procesador)cbProcesador.SelectedItem;
+
+            return dispositivo;
         }
 
         private void LimpiarFormulario()
@@ -66,7 +84,10 @@ namespace UI
             txtDescripcion.Clear();
             txtPrecio.Clear();
             txtCantidad.Clear();
+            chkResistenteAgua.Checked = false;
             cbEstado.SelectedIndex = 0;
+            cbTipo.SelectedIndex = 0;
+            cbProposito.SelectedIndex = 0;
         }
         #endregion
 
@@ -88,5 +109,14 @@ namespace UI
             }
         }
         #endregion
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool esNotebook = cbTipo.SelectedItem?.ToString() == "Notebook";
+
+            cbProposito.Visible = esNotebook;
+            lblProposito.Visible = esNotebook;
+            chkResistenteAgua.Visible = !esNotebook;
+        }
     }
 }

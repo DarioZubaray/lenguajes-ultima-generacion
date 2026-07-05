@@ -22,15 +22,39 @@ namespace MPP
             string input = nodo["Estado"].InnerText;
             Enum.TryParse<EstadoDispositivo>(input, out EstadoDispositivo result);
 
-            return new Dispositivo
+            string tipo = nodo.Attributes["tipo"]?.Value;
+            Dispositivo dispositivo;
+
+            switch (tipo)
             {
-                Codigo = int.Parse(nodo["Codigo"].InnerText),
-                Descripcion = nodo["Descripcion"].InnerText,
-                Precio = Convert.ToDouble(nodo["Precio"].InnerText),
-                Cantidad = int.Parse(nodo["Cantidad"].InnerText),
-                Estado = result,
-                Procesador = NodoAProcesador(nodo["Procesador"])
-            };
+                case "Notebook":
+                    dispositivo = new Notebook
+                    {
+                        Proposito = nodo["Proposito"]?.InnerText
+                    };
+                    break;
+
+                case "TelefonoMovil":
+                    dispositivo = new TelefonoMovil
+                    {
+                        ResistenteAgua = nodo["ResistenteAgua"] != null
+                            && bool.Parse(nodo["ResistenteAgua"].InnerText)
+                    };
+                    break;
+
+                default:
+                    dispositivo = new Dispositivo();
+                    break;
+            }
+
+            dispositivo.Codigo = int.Parse(nodo["Codigo"].InnerText);
+            dispositivo.Descripcion = nodo["Descripcion"].InnerText;
+            dispositivo.Precio = Convert.ToDouble(nodo["Precio"].InnerText);
+            dispositivo.Cantidad = int.Parse(nodo["Cantidad"].InnerText);
+            dispositivo.Estado = result;
+            dispositivo.Procesador = NodoAProcesador(nodo["Procesador"]);
+
+            return dispositivo;
         }
 
         private Procesador NodoAProcesador(XmlNode nodo)

@@ -30,6 +30,10 @@ namespace UI
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbProposito = new System.Windows.Forms.ComboBox();
+            this.lblProposito = new System.Windows.Forms.Label();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cbProcesador = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnAlta = new System.Windows.Forms.Button();
@@ -42,12 +46,18 @@ namespace UI
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chkResistenteAgua = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkResistenteAgua);
+            this.groupBox1.Controls.Add(this.cbProposito);
+            this.groupBox1.Controls.Add(this.lblProposito);
+            this.groupBox1.Controls.Add(this.cbTipo);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbProcesador);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnAlta);
@@ -65,6 +75,48 @@ namespace UI
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dispositivos";
+            // 
+            // cbProposito
+            // 
+            this.cbProposito.FormattingEnabled = true;
+            this.cbProposito.Items.AddRange(new object[] {
+            "Gaming",
+            "Oficina",
+            "Diseño"});
+            this.cbProposito.Location = new System.Drawing.Point(377, 109);
+            this.cbProposito.Name = "cbProposito";
+            this.cbProposito.Size = new System.Drawing.Size(186, 21);
+            this.cbProposito.TabIndex = 16;
+            // 
+            // lblProposito
+            // 
+            this.lblProposito.AutoSize = true;
+            this.lblProposito.Location = new System.Drawing.Point(290, 109);
+            this.lblProposito.Name = "lblProposito";
+            this.lblProposito.Size = new System.Drawing.Size(54, 13);
+            this.lblProposito.TabIndex = 15;
+            this.lblProposito.Text = "Propósito:";
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Items.AddRange(new object[] {
+            "Notebook",
+            "Teléfono Movil"});
+            this.cbTipo.Location = new System.Drawing.Point(377, 68);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(186, 21);
+            this.cbTipo.TabIndex = 14;
+            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(290, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Tipo:";
             // 
             // cbProcesador
             // 
@@ -85,7 +137,7 @@ namespace UI
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(377, 114);
+            this.btnAlta.Location = new System.Drawing.Point(606, 61);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(141, 47);
             this.btnAlta.TabIndex = 10;
@@ -169,6 +221,17 @@ namespace UI
             this.dataGridView1.Size = new System.Drawing.Size(762, 174);
             this.dataGridView1.TabIndex = 1;
             // 
+            // chkResistenteAgua
+            // 
+            this.chkResistenteAgua.AutoSize = true;
+            this.chkResistenteAgua.Location = new System.Drawing.Point(377, 111);
+            this.chkResistenteAgua.Name = "chkResistenteAgua";
+            this.chkResistenteAgua.Size = new System.Drawing.Size(114, 17);
+            this.chkResistenteAgua.TabIndex = 17;
+            this.chkResistenteAgua.Text = "Resistente al agua";
+            this.chkResistenteAgua.UseVisualStyleBackColor = true;
+            this.chkResistenteAgua.Visible = false;
+            // 
             // DispositivosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,5 +263,10 @@ namespace UI
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox cbProcesador;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbTipo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbProposito;
+        private System.Windows.Forms.Label lblProposito;
+        private System.Windows.Forms.CheckBox chkResistenteAgua;
     }
 }
