@@ -36,6 +36,9 @@ namespace UI
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dispositivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contratacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dispositivoMásVendidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.montoRecaudadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +46,8 @@ namespace UI
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.aBMToolStripMenuItem});
+            this.aBMToolStripMenuItem,
+            this.informesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(948, 24);
@@ -96,6 +100,29 @@ namespace UI
             this.contratacionToolStripMenuItem.Text = "Contratación";
             this.contratacionToolStripMenuItem.Click += new System.EventHandler(this.contratacionToolStripMenuItem_Click);
             // 
+            // informesToolStripMenuItem
+            // 
+            this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dispositivoMásVendidoToolStripMenuItem,
+            this.montoRecaudadoToolStripMenuItem});
+            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
+            this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.informesToolStripMenuItem.Text = "Informes";
+            // 
+            // dispositivoMásVendidoToolStripMenuItem
+            // 
+            this.dispositivoMásVendidoToolStripMenuItem.Name = "dispositivoMásVendidoToolStripMenuItem";
+            this.dispositivoMásVendidoToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.dispositivoMásVendidoToolStripMenuItem.Text = "Dispositivo más Vendido";
+            this.dispositivoMásVendidoToolStripMenuItem.Click += new System.EventHandler(this.dispositivoMásVendidoToolStripMenuItem_Click);
+            // 
+            // montoRecaudadoToolStripMenuItem
+            // 
+            this.montoRecaudadoToolStripMenuItem.Name = "montoRecaudadoToolStripMenuItem";
+            this.montoRecaudadoToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.montoRecaudadoToolStripMenuItem.Text = "Monto Recaudado";
+            this.montoRecaudadoToolStripMenuItem.Click += new System.EventHandler(this.montoRecaudadoToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,6 +149,9 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dispositivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contratacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dispositivoMásVendidoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem montoRecaudadoToolStripMenuItem;
     }
 }
 

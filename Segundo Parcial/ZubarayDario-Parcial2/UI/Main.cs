@@ -35,5 +35,15 @@ namespace UI
             form.MdiParent = this;
             form.Show();
         }
+
+        private void dispositivoMásVendidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void montoRecaudadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
