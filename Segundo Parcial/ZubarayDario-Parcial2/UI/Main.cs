@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using Persistencia;
+
 namespace UI
 {
     public partial class Main : Form
@@ -8,6 +10,12 @@ namespace UI
         public Main()
         {
             InitializeComponent();
+
+            // Generando archivos de pruebas
+            new ProcesadorXML();
+            new DispositivosXML();
+            new ClientesXML();
+            new ContratacionXML();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

@@ -134,6 +134,10 @@
       <Project>{3f28b11e-b949-4b81-bd03-88493dd4e0c0}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
+      <Project>{5186c34e-e242-4678-8e37-c203efc7e67e}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
