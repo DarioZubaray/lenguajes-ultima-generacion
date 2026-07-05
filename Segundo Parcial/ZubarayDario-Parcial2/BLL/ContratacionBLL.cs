@@ -43,6 +43,9 @@ namespace BLL
         public void Contratar(Cliente cliente, Dispositivo dispositivo)
         {
             this._contratacionesMPP.Guardar(cliente, dispositivo);
+            dispositivo.Estado = EstadoDispositivo.Adquirido;
+            cliente.Dispositivo = dispositivo;
+            this._clienteMPP.Guardar(cliente);
         }
     }
 }

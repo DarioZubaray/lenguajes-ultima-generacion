@@ -20,7 +20,6 @@ namespace UI
             this._procesadorBLL = new ProcesadorBLL();
             this._listaDispositivos = new List<Dispositivo>();
 
-            cbEstado.DataSource = Enum.GetValues(typeof(EstadoDispositivo));
             cbProcesador.DataSource = this._procesadorBLL.ListarTodo();
             cbTipo.SelectedIndex = 0;
             cbProposito.SelectedIndex = 0;
@@ -73,7 +72,7 @@ namespace UI
             dispositivo.Descripcion = txtDescripcion.Text.Trim();
             dispositivo.Precio = Convert.ToDouble(txtPrecio.Text.Trim());
             dispositivo.Cantidad = Convert.ToInt32(txtCantidad.Text.Trim());
-            dispositivo.Estado = (EstadoDispositivo)cbEstado.SelectedItem;
+            dispositivo.Estado = EstadoDispositivo.Disponible;
             dispositivo.Procesador = (Procesador)cbProcesador.SelectedItem;
 
             return dispositivo;
@@ -85,7 +84,6 @@ namespace UI
             txtPrecio.Clear();
             txtCantidad.Clear();
             chkResistenteAgua.Checked = false;
-            cbEstado.SelectedIndex = 0;
             cbTipo.SelectedIndex = 0;
             cbProposito.SelectedIndex = 0;
         }

@@ -30,6 +30,7 @@ namespace UI
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkResistenteAgua = new System.Windows.Forms.CheckBox();
             this.cbProposito = new System.Windows.Forms.ComboBox();
             this.lblProposito = new System.Windows.Forms.Label();
             this.cbTipo = new System.Windows.Forms.ComboBox();
@@ -37,16 +38,13 @@ namespace UI
             this.cbProcesador = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnAlta = new System.Windows.Forms.Button();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.chkResistenteAgua = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -61,20 +59,29 @@ namespace UI
             this.groupBox1.Controls.Add(this.cbProcesador);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnAlta);
-            this.groupBox1.Controls.Add(this.cbEstado);
             this.groupBox1.Controls.Add(this.txtCantidad);
             this.groupBox1.Controls.Add(this.txtPrecio);
             this.groupBox1.Controls.Add(this.txtDescripcion);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(762, 210);
+            this.groupBox1.Size = new System.Drawing.Size(762, 152);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dispositivos";
+            // 
+            // chkResistenteAgua
+            // 
+            this.chkResistenteAgua.AutoSize = true;
+            this.chkResistenteAgua.Location = new System.Drawing.Point(377, 111);
+            this.chkResistenteAgua.Name = "chkResistenteAgua";
+            this.chkResistenteAgua.Size = new System.Drawing.Size(114, 17);
+            this.chkResistenteAgua.TabIndex = 17;
+            this.chkResistenteAgua.Text = "Resistente al agua";
+            this.chkResistenteAgua.UseVisualStyleBackColor = true;
+            this.chkResistenteAgua.Visible = false;
             // 
             // cbProposito
             // 
@@ -145,14 +152,6 @@ namespace UI
             this.btnAlta.UseVisualStyleBackColor = true;
             this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
-            // cbEstado
-            // 
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(137, 140);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(100, 21);
-            this.cbEstado.TabIndex = 9;
-            // 
             // txtCantidad
             // 
             this.txtCantidad.Location = new System.Drawing.Point(137, 102);
@@ -173,15 +172,6 @@ namespace UI
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(100, 20);
             this.txtDescripcion.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(50, 140);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Estado:";
             // 
             // label4
             // 
@@ -215,22 +205,11 @@ namespace UI
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 240);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 171);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(762, 174);
+            this.dataGridView1.Size = new System.Drawing.Size(762, 243);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // chkResistenteAgua
-            // 
-            this.chkResistenteAgua.AutoSize = true;
-            this.chkResistenteAgua.Location = new System.Drawing.Point(377, 111);
-            this.chkResistenteAgua.Name = "chkResistenteAgua";
-            this.chkResistenteAgua.Size = new System.Drawing.Size(114, 17);
-            this.chkResistenteAgua.TabIndex = 17;
-            this.chkResistenteAgua.Text = "Resistente al agua";
-            this.chkResistenteAgua.UseVisualStyleBackColor = true;
-            this.chkResistenteAgua.Visible = false;
             // 
             // DispositivosForm
             // 
@@ -252,11 +231,9 @@ namespace UI
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAlta;
-        private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

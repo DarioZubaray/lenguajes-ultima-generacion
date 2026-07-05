@@ -122,13 +122,43 @@ namespace Persistencia
                 XmlDocument doc = new XmlDocument();
                 doc.Load(this.rutaArchivo);
 
-                XmlNode nodo = doc.SelectSingleNode($"//Cliente[Codigo='{cliente.Codigo}']");
-                if (nodo == null)
+                XmlNode nodoCliente = doc.SelectSingleNode($"//Cliente[Codigo='{cliente.Codigo}']");
+                if (nodoCliente == null)
                     throw new Exception($"No se encontró el cliente con código {cliente.Codigo}.");
 
-                nodo["Nombre"].InnerText = cliente.Nombre;
-                nodo["Apellido"].InnerText = cliente.Apellido;
-                nodo["DNI"].InnerText = cliente.DNI.ToString();
+                nodoCliente["Nombre"].InnerText = cliente.Nombre;
+                nodoCliente["Apellido"].InnerText = cliente.Apellido;
+                nodoCliente["DNI"].InnerText = cliente.DNI.ToString();
+
+                if (cliente.Dispositivo != null)
+                {
+                    var dispositivo = cliente.Dispositivo;
+
+                    XmlElement LennodoDispositivo = nodoCliente["Dispositivo"];
+                    if (LennodoDispositivo == null)
+                    {
+                        LennodoDispositivo = doc.CreateElement("Dispositivo");
+                        nodoCliente.AppendChild(LennodoDispositivo);
+                    }
+
+                    string tipoDispositivo = "";
+                    if (dispositivo is Notebook)
+                    {
+                        tipoDispositivo = "Notebook";
+                    }
+                    else if (dispositivo is TelefonoMovil)
+                    {
+                        tipoDispositivo = "Teléfono Movil";
+                    }
+
+                    LennodoDispositivo.SetAttribute("tipo", tipoDispositivo);
+
+                    ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Codigo", dispositivo.Codigo.ToString());
+                    ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Descripcion", dispositivo.Descripcion);
+                    ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Precio", dispositivo.Precio.ToString());
+                    ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Cantidad", dispositivo.Cantidad.ToString());
+                    ActualizarOCrearSubNodo(doc, LennodoDispositivo, "Estado", EstadoDispositivo.Adquirido.ToString());
+                }
 
                 doc.Save(this.rutaArchivo);
             }
@@ -136,6 +166,17 @@ namespace Persistencia
             {
                 throw;
             }
+        }
+
+        private void ActualizarOCrearSubNodo(XmlDocument doc, XmlNode nodoPadre, string nombreNodo, string valor)
+        {
+            XmlNode subNodo = nodoPadre[nombreNodo];
+            if (subNodo == null)
+            {
+                subNodo = doc.CreateElement(nombreNodo);
+                nodoPadre.AppendChild(subNodo);
+            }
+            subNodo.InnerText = valor;
         }
 
         public void Eliminar(int codigo)
