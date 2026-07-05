@@ -79,10 +79,17 @@ namespace Persistencia
             return maxCodigo + 1;
         }
 
+        public XmlDocument GetXmlDocument()
+        {
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(this.rutaArchivo);
+            return doc;
+        }
+
         public XmlNodeList ObtenerClientes()
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(rutaArchivo);
+            XmlDocument doc = GetXmlDocument();
             return doc.SelectNodes("//Cliente");
         }
         #endregion

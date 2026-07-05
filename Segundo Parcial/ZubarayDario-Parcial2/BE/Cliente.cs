@@ -7,5 +7,10 @@
         public string Apellido { get; set; }
         public int DNI { get; set; }
         public Dispositivo Dispositivo { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Nombre} {Apellido} - ({DNI})";
+        }
     }
 }

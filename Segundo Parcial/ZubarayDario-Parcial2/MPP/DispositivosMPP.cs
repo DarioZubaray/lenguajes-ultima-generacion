@@ -64,6 +64,21 @@ namespace MPP
             return lista;
         }
 
+        public Dispositivo ObtenerPorCodigo(int codigo)
+        {
+            try
+            {
+                XmlDocument doc = _dispositivoXML.GetXmlDocument();
+
+                XmlNode nodo = doc.SelectSingleNode($"//Dispositivo[Codigo='{codigo}']");
+                return nodo != null ? NodoADispositivo(nodo) : null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool Guardar(Dispositivo dispositivo)
         {
             try

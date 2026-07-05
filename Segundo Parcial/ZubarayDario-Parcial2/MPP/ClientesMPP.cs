@@ -49,6 +49,21 @@ namespace MPP
             return lista;
         }
 
+        public Cliente ObtenerPorCodigo(int codigo)
+        {
+            try
+            {
+                XmlDocument doc = ClienteXML.GetXmlDocument();
+
+                XmlNode nodo = doc.SelectSingleNode($"//Cliente[Codigo='{codigo}']");
+                return nodo != null ? NodoACliente(nodo) : null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool Guardar(Cliente cliente)
         {
             try

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientesMPP.cs" />
+    <Compile Include="ContratacionMPP.cs" />
     <Compile Include="DispositivosMPP.cs" />
     <Compile Include="ProcesadorMPP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
