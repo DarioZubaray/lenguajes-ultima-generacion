@@ -7,18 +7,17 @@ using MPP;
 
 namespace BLL
 {
-    public class InformeDispositivoMasVendidoBLL
+    public class InformeMontoRecaudadoBLL
     {
         private ContratacionMPP _contratacionMPP;
         private DispositivosMPP _dispositivosMPP;
 
-        public InformeDispositivoMasVendidoBLL()
+        public InformeMontoRecaudadoBLL()
         {
             this._contratacionMPP = new ContratacionMPP();
             this._dispositivosMPP = new DispositivosMPP();
         }
-
-        public (string[] dispositivos, double[] unidades) ObtenerDispositivosMasVendidos()
+        public (string[] dispositivos, double[] montos) ObtenerMontosRecaudados()
         {
             var contrataciones = _contratacionMPP.ListarTodo();
 
@@ -60,6 +59,5 @@ namespace BLL
 
             return (dispositivos, unidades);
         }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using BE;
 using BLL;
 
 namespace UI
