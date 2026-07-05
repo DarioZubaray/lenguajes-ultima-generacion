@@ -38,12 +38,16 @@ namespace UI
 
         private void dispositivoMásVendidoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            InformeDispositivoMasVendido form = new InformeDispositivoMasVendido();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void montoRecaudadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            InformeMontoRecaudado form = new InformeMontoRecaudado();
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }

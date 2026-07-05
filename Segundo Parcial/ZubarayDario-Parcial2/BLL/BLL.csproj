@@ -46,6 +46,7 @@
     <Compile Include="ContratacionBLL.cs" />
     <Compile Include="DispositivoException.cs" />
     <Compile Include="DispositivosBLL.cs" />
+    <Compile Include="InformeDispositivoMasVendidoBLL.cs" />
     <Compile Include="ProcesadorBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
