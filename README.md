@@ -6,4 +6,4 @@
 
 - [2do TP](/LUG-TP2/)
 
-- 2do Parcial
+- [2do Parcial](/Segundo%20Parcial)
